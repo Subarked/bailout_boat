@@ -13,7 +13,6 @@ public partial class Player : CharacterBody2D
 	public double MaxHealth = 100;
 	[Export]
 	public double Health = 100;
-	
 	private Node2D sprite;
 	private ShapeCast2D PlatfornDetect;
 	private Area2D InteractArea;
@@ -41,16 +40,18 @@ public partial class Player : CharacterBody2D
 	//see if interact button was pressed and interact if so
 	void TryInteract()
 	{
-		bool buttonPressed = Input.IsActionJustPressed("interact");
-		if (buttonPressed)
+
+		bool interactButtonPressed = Input.IsActionJustPressed("interact");
+		if (interactButtonPressed)
 		{
-			if (InteractArea.HasOverlappingAreas())
+			if (InteractArea.HasOverlappingAreas()) //if InteractArea is touching other Areas
 			{
 				var OverlappingAreas = InteractArea.GetOverlappingAreas();
 				foreach (var area in OverlappingAreas)
 				{
 					Node interactedNode = area.GetParent();
-					if (interactedNode is InteractableObject) {
+					if (interactedNode is InteractableObject)
+					{
 						InteractableObject interacted = interactedNode as InteractableObject;
 						interacted.Interact(this);
 					}
@@ -71,63 +72,71 @@ public partial class Player : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		
-
 		if (isUnderwater)
 		{
-			OxygenTime -= delta;
+			OxygenTime -= delta; //OxygenTime - time since last physics frame
 
-			if (OxygenTime <= 0) {
-				Health -= delta*20;
+			if (OxygenTime <= 0) //if is drowning
+			{
+				Health -= delta * 20; //subtract 20 health per second
 			}
-		} else {
-			OxygenTime += delta*3;
 		}
-		OxygenTime = Math.Clamp(OxygenTime,0,ToppedOffOxygenTime);
-		Health = Math.Clamp(Health,0,MaxHealth);
+		else
+		{
+			OxygenTime += delta * 3; //add 3 seconds underwater for each second above water
+		}
+		OxygenTime = Math.Clamp(OxygenTime, 0, ToppedOffOxygenTime); //keep oxygen in the range of 0 to the max oxgen time
+		Health = Math.Clamp(Health, 0, MaxHealth); //same as above but health
 		Vector2 velocity = Velocity;
 
-		if (velocity.X < 0)
-		{
-			sprite.Scale = new Vector2(-1, 1);
-		}
-		if (velocity.X > 0)
-		{
-			sprite.Scale = new Vector2(1, 1);
-		}
-		// Add the gravity.
-		if (!IsOnFloor() && !isFlying)
-			velocity += gravity * (float)delta;
+		sprite.Scale = velocity.X < 0 ? new Vector2(-1, 1) : new Vector2(1, 1);
+		////Expanded Ternary (?:) operator
+		//if (velocity.X < 0)
+		//{
+		//	sprite.Scale = new Vector2(-1, 1);
+		//}
+		//else
+		//{
+		//	sprite.Scale = new Vector2(1, 1);
+		//}
 
+		// Add the gravity.
+		if (!IsOnFloor() && !isFlying) {
+			velocity += gravity * (float)delta; //gravity m/s/s
+		}
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
 		Vector2 direction = Input.GetVector("movement_left", "movement_right", "movement_up", "movement_down");
 		if (!isFlying)
 		{
-			if (direction != Vector2.Zero)
-			{
-				velocity.X = direction.X * HorizontalMovementSpeed;
-			}
-			else
-			{
-				velocity.X = Mathf.MoveToward(Velocity.X, 0, HorizontalMovementSpeed);
-			}
+			velocity.X = direction != Vector2.Zero ? direction.X * HorizontalMovementSpeed : Mathf.MoveToward(Velocity.X, 0, HorizontalMovementSpeed);
+			//Expanded Ternary (?:) operator
+			//if (direction != Vector2.Zero)
+			//{
+			//	velocity.X = direction.X * HorizontalMovementSpeed;
+			//}
+			//else
+			//{
+			//	velocity.X = Mathf.MoveToward(Velocity.X, 0, HorizontalMovementSpeed);
+			//}
 		}
 		else
 		{
-			if (direction != Vector2.Zero)
-			{
-				velocity = direction * HorizontalMovementSpeed;
-			}
-			else
-			{
-				velocity = new Vector2(Mathf.MoveToward(Velocity.X, 0, HorizontalMovementSpeed), Mathf.MoveToward(Velocity.Y, 0, HorizontalMovementSpeed));
-			}
+			velocity = direction != Vector2.Zero ? direction * HorizontalMovementSpeed : new Vector2(Mathf.MoveToward(Velocity.X, 0, HorizontalMovementSpeed), Mathf.MoveToward(Velocity.Y, 0, HorizontalMovementSpeed));
+			////Expanded Ternary (?:) operator
+			//if (direction != Vector2.Zero)
+			//{
+			//	velocity = direction * HorizontalMovementSpeed;
+			//}
+			//else
+			//{
+			//	velocity = new Vector2(Mathf.MoveToward(Velocity.X, 0, HorizontalMovementSpeed), Mathf.MoveToward(Velocity.Y, 0, HorizontalMovementSpeed));
+			//}
 		}
 
 		if (direction.Y > 0 && IsOnFloor() && PlatfornDetect.IsColliding())
 		{
-			Position = Position + gravityVector;
+			Position += gravityVector;
 		}
 
 		if (Position.Y > 1000)
