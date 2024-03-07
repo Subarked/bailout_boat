@@ -9,7 +9,6 @@ public partial class DoorBehaviour : ToggleInteractableObject
 	public RoomBehaviour Room1;
 	[Export]
 	public float DoorHeight;
-	private bool prevIsOpen = false;
 	private StaticBody2D collider;
 	float TransferSpeed;
 	// Called when the node enters the scene tree for the first time.
