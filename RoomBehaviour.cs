@@ -4,7 +4,7 @@ using System;
 public partial class RoomBehaviour : Node2D
 {
 	[Export]
-	public float FloodAmount;
+	public double FloodAmount;
 	[Export]
 	public float Area;
 	[Export]
@@ -31,7 +31,7 @@ public partial class RoomBehaviour : Node2D
     public override void _PhysicsProcess(double delta)
     {
         FloodAmount= Mathf.Min(FloodAmount,Area);
-		FillAmount = FloodAmount/Area;
+		FillAmount = (float)FloodAmount/Area;
 		WaterHeight = FillAmount*Height;
 		WaterHeightYPosition = GlobalPosition.Y+Height/2f-WaterHeight;
     }

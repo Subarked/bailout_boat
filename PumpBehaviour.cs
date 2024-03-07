@@ -36,8 +36,8 @@ public partial class PumpBehaviour : ToggleInteractableObject
 		if (State)
 		{
 			//I swear I'll learn fluid dynamics soon please bear with me
-			float pressure = Mathf.Clamp(Room.Area / Room.FloodAmount, 0, 1); //Completely bullshit pressure calc
-			float TransferAmount = Mathf.Clamp(Room.FloodAmount, -TransferSpeed * (float)delta, TransferSpeed * (float)delta); //Amount to transfer from Room0 to NULL, negative if transferring from NULL to Room0
+			double pressure = Math.Clamp(Room.Area / Room.FloodAmount, 0, 1); //Completely bullshit pressure calc
+			double TransferAmount = Math.Clamp(Room.FloodAmount, -TransferSpeed * delta, TransferSpeed * delta); //Amount to transfer from Room0 to NULL, negative if transferring from NULL to Room0
 			Room.FloodAmount -= TransferAmount * pressure; //Change Room0 water amounts, Multiply by pressure to make it slower at lower amounts
 		}
 	}
