@@ -22,8 +22,9 @@ public partial class DoorBehaviour : ToggleInteractableObject
 	{
 		if (State)
 		{
+			//These numbers don't make sense, I'll learn fluid dynamics eventually I promise
 			float difference = Room0.FloodAmount - Room1.FloodAmount; //Room0 > Room1 = +, Room0 < Room1 = -
-			float pressure = Mathf.Clamp(Room0.Area / difference / 2f + Room1.Area / difference / 2f, 0, 1); //Completely bullshit pressure calc XD
+			float pressure = Mathf.Clamp(Room0.Area / Mathf.Abs(difference) / 2f + Room1.Area / Mathf.Abs(difference) / 2f, 0, 1); //Completely bullshit pressure calc XD
 			float TransferAmount = Mathf.Clamp(difference, -TransferSpeed * (float)delta, TransferSpeed * (float)delta); //Amount to transfer from Room0 to Room1, negative if transferring from Room1 to Room0
 			Room0.FloodAmount -= TransferAmount * pressure; //Change Room0 water amounts, Multiply by pressure to make it slower at lower amounts
 			Room1.FloodAmount += TransferAmount * pressure; //Change Room1 water amounts, Multiply by pressure to make it slower at lower amounts
