@@ -57,11 +57,11 @@ public partial class Player : CharacterBody2D
 				}
 			}
 		}
-		bool altInteracted = Input.IsActionJustPressed("interact_alt");
-		if (altInteracted)
-		{
-			//TODO: FIND A USE
-		}
+		//bool altInteracted = Input.IsActionJustPressed("interact_alt");
+		//if (altInteracted)
+		//{
+		//	//TODO: FIND A USE
+		//}
 	}
 
 	void CameraAreaEntered(Area2D area)
