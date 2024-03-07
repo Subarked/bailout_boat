@@ -23,6 +23,7 @@ window/size/mode=3
 window/size/borderless=true
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
+window/stretch/scale_mode="integer"
 window/vsync/vsync_mode=3
 
 [dotnet]
