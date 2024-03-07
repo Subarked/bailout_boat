@@ -4,7 +4,7 @@ using System;
 public partial class InteractableObject : Node2D
 {
 	[Export]
-	public double maxInteractDistance = Math.Pow(Math.Pow(32, 2) + Math.Pow(16, 2), 1d / 2d);
+	public double maxInteractDistance = 35.77708764;
 	public int Interact(Player player)
 	{
 		if (player.GlobalPosition.DistanceTo(this.GlobalPosition) <= maxInteractDistance)
