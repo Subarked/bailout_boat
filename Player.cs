@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class Player : CharacterBody2D
@@ -5,9 +6,9 @@ public partial class Player : CharacterBody2D
 	public const float HorizontalMovementSpeed = 300.0f;
 	public const float JumpVelocity = -400.0f;
 	[Export]
-	public float ToppedOffOxygenTime = 30000;
+	public double ToppedOffOxygenTime = 30;
 	[Export]
-	public float OxygenTime = 30000;
+	public double OxygenTime = 30;
 	[Export]
 	public double MaxHealth = 100;
 	[Export]
@@ -70,21 +71,20 @@ public partial class Player : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		Health = Mathf.Clamp(Health,0,MaxHealth);
+		
 
 		if (isUnderwater)
 		{
-			OxygenTime -= (float)delta;
-			OxygenTime = Mathf.Clamp(OxygenTime,0,ToppedOffOxygenTime);
+			OxygenTime -= delta;
 
-			if (OxygenTime == 0) {
-				Health -= (float)delta*20f;
-				Health = Mathf.Clamp(Health,0,MaxHealth);
+			if (OxygenTime <= 0) {
+				Health -= delta*20;
 			}
 		} else {
-			OxygenTime += (float)delta*3f;
-			OxygenTime = Mathf.Clamp(OxygenTime,0,ToppedOffOxygenTime);
+			OxygenTime += delta*3;
 		}
+		OxygenTime = Math.Clamp(OxygenTime,0,ToppedOffOxygenTime);
+		Health = Math.Clamp(Health,0,MaxHealth);
 		Vector2 velocity = Velocity;
 
 		if (velocity.X < 0)
