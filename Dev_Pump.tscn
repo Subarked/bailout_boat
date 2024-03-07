@@ -15,8 +15,8 @@ texture = ExtResource("2_eseyf")
 hframes = 2
 
 [node name="Pump_Area" type="Area2D" parent="."]
-collision_layer = 32
-collision_mask = 32
+collision_layer = 4
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pump_Area"]
 shape = SubResource("RectangleShape2D_wxbuo")

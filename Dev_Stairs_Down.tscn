@@ -14,8 +14,8 @@ script = ExtResource("1_bg1cf")
 texture = ExtResource("1_55n5p")
 
 [node name="Stairs_Area" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 16
+collision_layer = 4
+collision_mask = 4
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_Area"]
