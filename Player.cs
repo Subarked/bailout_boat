@@ -141,7 +141,7 @@ public partial class Player : CharacterBody2D
 
 		if (Position.Y > 1000)
 		{
-			Position = startingPositon;
+			Position = startingPositon; //if player is below 1000 pixels from 0,0 reset position
 		}
 
 		if (Input.IsActionJustPressed("dev_fly"))
@@ -149,7 +149,7 @@ public partial class Player : CharacterBody2D
 			isFlying = !isFlying;
 		};
 
-		if (RoomDetect.HasOverlappingAreas()) //Drowning! Yippee!
+		if (RoomDetect.HasOverlappingAreas()) //Drowning detection
 		{
 			var OverlappingAreas = RoomDetect.GetOverlappingAreas();
 			foreach (var area in OverlappingAreas)
