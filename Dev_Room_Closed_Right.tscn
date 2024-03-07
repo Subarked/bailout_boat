@@ -110,16 +110,16 @@ monitoring = false
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Room_Area"]
 shape = SubResource("RectangleShape2D_u5lni")
 
-[node name="Stairs_0" parent="." node_paths=PackedStringArray("ConnectedStairsBehaviour") instance=ExtResource("5_hq4uj")]
+[node name="Stairs_0" parent="." node_paths=PackedStringArray("ConnectedStairs") instance=ExtResource("5_hq4uj")]
 position = Vector2(76, 49)
-ConnectedStairsBehaviour = NodePath("../Stairs_1")
+ConnectedStairs = NodePath("../Stairs_1")
 
 [node name="Stairs_1" parent="." instance=ExtResource("6_c2e2f")]
 position = Vector2(76, 3)
 
-[node name="Stairs_2" parent="." node_paths=PackedStringArray("ConnectedStairsBehaviour") instance=ExtResource("5_hq4uj")]
+[node name="Stairs_2" parent="." node_paths=PackedStringArray("ConnectedStairs") instance=ExtResource("5_hq4uj")]
 position = Vector2(-76, 3)
-ConnectedStairsBehaviour = NodePath("../Stairs_3")
+ConnectedStairs = NodePath("../Stairs_3")
 
 [node name="Stairs_3" parent="." instance=ExtResource("6_c2e2f")]
 position = Vector2(-76, -43)
