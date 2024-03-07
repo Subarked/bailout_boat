@@ -1,0 +1,124 @@
+[gd_scene load_steps=15 format=3 uid="uid://bsstgdk8a01p0"]
+
+[ext_resource type="Script" path="res://RoomBehaviour.cs" id="1_mhrdi"]
+[ext_resource type="Texture2D" uid="uid://bngc3slfr2i7a" path="res://Textures/Dev_Room_Infill.png" id="2_c0ua7"]
+[ext_resource type="Texture2D" uid="uid://b6t2m8r1bqcpg" path="res://Textures/Dev_Room_Outline.png" id="3_itxnf"]
+[ext_resource type="Material" uid="uid://b7enb3lrw2fcf" path="res://Room_Water_Fill.material" id="3_n2ta2"]
+[ext_resource type="PackedScene" uid="uid://cc5a1hiaqxkuj" path="res://Dev_Stairs_Down.tscn" id="5_mkee7"]
+[ext_resource type="PackedScene" uid="uid://ks8kc3hkcgc0" path="res://Dev_Stairs_Up.tscn" id="6_ajwbe"]
+[ext_resource type="PackedScene" uid="uid://bsjgomqe54mgy" path="res://Dev_Pump.tscn" id="7_nc6ev"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pefxg"]
+size = Vector2(264, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7afkq"]
+size = Vector2(4, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3abnb"]
+size = Vector2(4, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ccha6"]
+size = Vector2(4, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3atjf"]
+size = Vector2(264, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cbdo0"]
+size = Vector2(256, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5lni"]
+size = Vector2(256, 134)
+
+[node name="Dev_Room" type="Node2D"]
+script = ExtResource("1_mhrdi")
+Area = 672.0
+Height = 134.0
+Width = 256.0
+
+[node name="Room Background" type="Sprite2D" parent="."]
+z_index = -20
+z_as_relative = false
+texture = ExtResource("2_c0ua7")
+
+[node name="Room Water" type="Sprite2D" parent="."]
+z_as_relative = false
+material = ExtResource("3_n2ta2")
+texture = ExtResource("2_c0ua7")
+
+[node name="Solid Walls" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Solid Walls"]
+position = Vector2(0, 69)
+shape = SubResource("RectangleShape2D_pefxg")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Solid Walls"]
+position = Vector2(-130, 26)
+shape = SubResource("RectangleShape2D_7afkq")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Solid Walls"]
+position = Vector2(130, 26)
+shape = SubResource("RectangleShape2D_3abnb")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Solid Walls"]
+position = Vector2(-130, 0)
+shape = SubResource("RectangleShape2D_ccha6")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Solid Walls"]
+position = Vector2(130, 0)
+shape = SubResource("RectangleShape2D_ccha6")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Solid Walls"]
+position = Vector2(0, -69)
+shape = SubResource("RectangleShape2D_3atjf")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Solid Walls"]
+position = Vector2(-130, -46)
+shape = SubResource("RectangleShape2D_ccha6")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Solid Walls"]
+position = Vector2(130, -46)
+shape = SubResource("RectangleShape2D_ccha6")
+
+[node name="Fallthrough Floors" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Fallthrough Floors"]
+position = Vector2(0, 23)
+shape = SubResource("RectangleShape2D_cbdo0")
+one_way_collision = true
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Fallthrough Floors"]
+position = Vector2(0, -23)
+shape = SubResource("RectangleShape2D_cbdo0")
+one_way_collision = true
+
+[node name="Room Outline" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("3_itxnf")
+
+[node name="Room_Area" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+monitoring = false
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Room_Area"]
+shape = SubResource("RectangleShape2D_u5lni")
+
+[node name="Stairs_0" parent="." node_paths=PackedStringArray("ConnectedStairsBehaviour") instance=ExtResource("5_mkee7")]
+position = Vector2(76, 49)
+ConnectedStairsBehaviour = NodePath("../Stairs_1")
+
+[node name="Stairs_1" parent="." instance=ExtResource("6_ajwbe")]
+position = Vector2(76, 3)
+
+[node name="Stairs_2" parent="." node_paths=PackedStringArray("ConnectedStairsBehaviour") instance=ExtResource("5_mkee7")]
+position = Vector2(-76, 3)
+ConnectedStairsBehaviour = NodePath("../Stairs_3")
+
+[node name="Stairs_3" parent="." instance=ExtResource("6_ajwbe")]
+position = Vector2(-76, -43)
+
+[node name="Dev_Pump" parent="." instance=ExtResource("7_nc6ev")]
+z_index = -1
+position = Vector2(0, 51)

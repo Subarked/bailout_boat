@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ks8kc3hkcgc0"]
+
+[ext_resource type="Script" path="res://StairsBehaviour.cs" id="1_prkgj"]
+[ext_resource type="Texture2D" uid="uid://b6x2ayp08ku44" path="res://Textures/Dev_Stairs_Up.png" id="2_i4cxa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ij2u"]
+size = Vector2(32, 32)
+
+[node name="Dev_Stairs" type="Node2D"]
+z_index = -1
+script = ExtResource("1_prkgj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_i4cxa")
+
+[node name="Stairs_Area" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs_Area"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_2ij2u")

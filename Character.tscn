@@ -1,0 +1,149 @@
+[gd_scene load_steps=14 format=3 uid="uid://dee8jli40obvo"]
+
+[ext_resource type="Script" path="res://Character.cs" id="1_7s7n8"]
+[ext_resource type="Texture2D" uid="uid://bmiixnev5f0hx" path="res://Textures/CharacterBlue.png" id="2_cqbvf"]
+[ext_resource type="Script" path="res://CharacterInfo.cs" id="3_ixthb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bfwwa"]
+size = Vector2(16, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x17s5"]
+size = Vector2(16, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1wddt"]
+size = Vector2(2, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_syvtw"]
+size = Vector2(2, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yrly7"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i7eyy"]
+size = Vector2(64, 32)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbk2q"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jex5p"]
+bg_color = Color(0.501961, 0.501961, 0.501961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvubm"]
+bg_color = Color(1, 0.6, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vioo"]
+bg_color = Color(0.6, 0.6, 1, 1)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_7s7n8")
+MaxOxygenTime = 30.0
+OxygenTime = 30.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_cqbvf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bfwwa")
+
+[node name="PlatformDetect" type="ShapeCast2D" parent="."]
+shape = SubResource("RectangleShape2D_x17s5")
+target_position = Vector2(0, 16)
+collision_mask = 2
+
+[node name="CameraChangeDetect" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CameraChangeDetect"]
+shape = SubResource("RectangleShape2D_1wddt")
+
+[node name="StairDetect" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StairDetect"]
+shape = SubResource("RectangleShape2D_syvtw")
+
+[node name="PumpDetect" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="PumpDetect"]
+shape = SubResource("RectangleShape2D_yrly7")
+
+[node name="DoorDetect" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DoorDetect"]
+shape = SubResource("RectangleShape2D_i7eyy")
+
+[node name="Bars" type="Control" parent="." node_paths=PackedStringArray("HealthPanel", "OxygenPanel")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -25.0
+offset_right = 20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_ixthb")
+HealthPanel = NodePath("Panel/Health")
+OxygenPanel = NodePath("Panel/Oxygen")
+
+[node name="Panel" type="Panel" parent="Bars"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lbk2q")
+
+[node name="Panel" type="Panel" parent="Bars/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jex5p")
+
+[node name="Panel2" type="Panel" parent="Bars/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jex5p")
+
+[node name="Health" type="Panel" parent="Bars/Panel"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 39.0
+offset_bottom = 2.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lvubm")
+
+[node name="Oxygen" type="Panel" parent="Bars/Panel"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 39.0
+offset_bottom = 4.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4vioo")

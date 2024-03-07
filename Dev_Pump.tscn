@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsjgomqe54mgy"]
+
+[ext_resource type="Script" path="res://PumpBehaviour.cs" id="1_p51gn"]
+[ext_resource type="Texture2D" uid="uid://db34qy6isp8y8" path="res://Textures/EntityPumpRed.png" id="2_eseyf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wxbuo"]
+size = Vector2(32, 32)
+
+[node name="Dev_Pump" type="Node2D"]
+script = ExtResource("1_p51gn")
+PumpWidth = 2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_eseyf")
+hframes = 2
+
+[node name="Pump_Area" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pump_Area"]
+shape = SubResource("RectangleShape2D_wxbuo")

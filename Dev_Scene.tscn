@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://i1c8s4iwlev7"]
+
+[ext_resource type="PackedScene" uid="uid://dee8jli40obvo" path="res://Character.tscn" id="1_pxg1m"]
+[ext_resource type="PackedScene" uid="uid://drxqal7eseyr0" path="res://Dev_Room_Closed_Left.tscn" id="2_03nrr"]
+[ext_resource type="PackedScene" uid="uid://bsstgdk8a01p0" path="res://Dev_Room.tscn" id="2_uli63"]
+[ext_resource type="PackedScene" uid="uid://dnxepypn33u2k" path="res://Dev_Door.tscn" id="3_bpwds"]
+[ext_resource type="Script" path="res://CameraControl.cs" id="4_pu5dw"]
+[ext_resource type="PackedScene" uid="uid://t7ty5ldnqq2p" path="res://Dev_Room_Closed_Right.tscn" id="4_yjtfo"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_pxg1m")]
+position = Vector2(-118, -41)
+
+[node name="Ship Root" type="Node" parent="."]
+
+[node name="Room_0" parent="Ship Root" instance=ExtResource("2_03nrr")]
+FloodAmount = 1035.0
+
+[node name="Room_1" parent="Ship Root" instance=ExtResource("2_uli63")]
+position = Vector2(264, 0)
+
+[node name="Room_2" parent="Ship Root" instance=ExtResource("2_uli63")]
+position = Vector2(528, 0)
+
+[node name="Room_3" parent="Ship Root" instance=ExtResource("4_yjtfo")]
+position = Vector2(792, 0)
+
+[node name="Door_0" parent="Ship Root" node_paths=PackedStringArray("Room0", "Room1") instance=ExtResource("3_bpwds")]
+position = Vector2(132, 49)
+Room0 = NodePath("../Room_0")
+Room1 = NodePath("../Room_1")
+
+[node name="Door_3" parent="Ship Root" node_paths=PackedStringArray("Room0", "Room1") instance=ExtResource("3_bpwds")]
+position = Vector2(396, 49)
+Room0 = NodePath("../Room_1")
+Room1 = NodePath("../Room_2")
+
+[node name="Door_6" parent="Ship Root" node_paths=PackedStringArray("Room0", "Room1") instance=ExtResource("3_bpwds")]
+position = Vector2(660, 49)
+Room0 = NodePath("../Room_2")
+Room1 = NodePath("../Room_3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(66, -15)
+position_smoothing_enabled = true
+script = ExtResource("4_pu5dw")
