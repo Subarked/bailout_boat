@@ -1,8 +1,4 @@
 using Godot;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Formats.Asn1;
-using System.Runtime.InteropServices;
 
 public partial class Player : CharacterBody2D
 {
