@@ -15,10 +15,8 @@ public partial class Player : CharacterBody2D
 	
 	private Node2D sprite;
 	private ShapeCast2D PlatfornDetect;
-	private Area2D DoorDetect;
+	private Area2D InteractArea;
 	private Area2D RoomDetect;
-	private Area2D StairDetect;
-	private Area2D PumpDetect;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravityIntensity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
@@ -33,68 +31,27 @@ public partial class Player : CharacterBody2D
 		sprite = FindChild("Sprite2D") as Node2D;
 		PlatfornDetect = FindChild("PlatformDetect") as ShapeCast2D;
 		RoomDetect = FindChild("CameraChangeDetect") as Area2D;
-		StairDetect = FindChild("StairDetect") as Area2D;
-		PumpDetect = FindChild("PumpDetect") as Area2D;
-		DoorDetect = FindChild("DoorDetect") as Area2D;
+		InteractArea = FindChild("InteractArea") as Area2D;
 
 		startingPositon = Position;
 		gravity = gravityVector * gravityIntensity;
 		RoomDetect.AreaEntered += CameraAreaEntered;
 	}
-
+	//see if interact button was pressed and interact if so
 	void TryInteract()
 	{
-		bool interacted = Input.IsActionJustPressed("interact");
-		if (interacted)
+		bool buttonPressed = Input.IsActionJustPressed("interact");
+		if (buttonPressed)
 		{
-			if (DoorDetect.HasOverlappingAreas())
+			if (InteractArea.HasOverlappingAreas())
 			{
-				var OverlappingAreas = DoorDetect.GetOverlappingAreas();
+				var OverlappingAreas = InteractArea.GetOverlappingAreas();
 				foreach (var area in OverlappingAreas)
 				{
-					if (area.Name == "Door_Area")
-					{
-						Node doorNode = area.GetParent();
-						if (doorNode != null)
-						{
-							DoorBehaviour door = doorNode as DoorBehaviour;
-							door.IsOpen = !door.IsOpen;
-						}
-					}
-				}
-			}
-			if (StairDetect.HasOverlappingAreas())
-			{
-				var OverlappingAreas = StairDetect.GetOverlappingAreas();
-				foreach (var area in OverlappingAreas)
-				{
-					if (area.Name == "Stairs_Area")
-					{
-						Node stairsNode = area.GetParent();
-						if (stairsNode != null)
-						{
-							StairsBehaviour stairs = stairsNode as StairsBehaviour;
-							Vector2 startingPosition = stairs.GlobalPosition;
-							Vector2 endingPosition = stairs.ConnectedStairsBehaviour.GlobalPosition;
-							Vector2 initialOffset = GlobalPosition - startingPosition;
-							GlobalPosition = endingPosition + initialOffset;
-						}
-					}
-				}
-			}
-			if (PumpDetect.HasOverlappingAreas())
-			{
-				var OverlappingAreas = PumpDetect.GetOverlappingAreas();
-				foreach (var area in OverlappingAreas)
-				{
-					if (area.Name == "Pump_Area")
-					{
-						Node pumpNode = area.GetParent();
-						if (pumpNode != null)
-						{
-							PumpBehaviour pump = pumpNode as PumpBehaviour;
-							pump.IsOpen = !pump.IsOpen;
-						}
+					Node interactedNode = area.GetParent();
+					if (interactedNode is InteractableObject) {
+						InteractableObject interacted = interactedNode as InteractableObject;
+						interacted.Interact(this);
 					}
 				}
 			}
