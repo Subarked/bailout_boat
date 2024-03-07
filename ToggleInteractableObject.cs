@@ -9,7 +9,7 @@ public partial class ToggleInteractableObject : InteractableObject
 		return SwitchedState(player,State);
 	}
 	//was toggled
-	public virtual int SwitchedState(Player player, bool currentState) {
+	public virtual int SwitchedState(Player player) {
 		return 1;
 	}
 }
