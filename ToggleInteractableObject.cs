@@ -3,7 +3,7 @@ public partial class ToggleInteractableObject : InteractableObject
 {
 	[Export]
 	public bool State = false;
-	public override int Interact(Player player) {
+	public override int Interacted(Player player) {
 		State = !State;
 		
 		return SwitchedState(player);
