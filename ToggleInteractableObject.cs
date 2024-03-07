@@ -6,7 +6,7 @@ public partial class ToggleInteractableObject : InteractableObject
 	public override int Interact(Player player) {
 		State = !State;
 		
-		return SwitchedState(player,State);
+		return SwitchedState(player);
 	}
 	//was toggled
 	public virtual int SwitchedState(Player player) {
