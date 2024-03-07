@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://dee8jli40obvo"]
 
-[ext_resource type="Script" path="res://Character.cs" id="1_7s7n8"]
+[ext_resource type="Script" path="res://Player.cs" id="1_7s7n8"]
 [ext_resource type="Texture2D" uid="uid://bmiixnev5f0hx" path="res://Textures/CharacterBlue.png" id="2_cqbvf"]
 [ext_resource type="Script" path="res://CharacterInfo.cs" id="3_ixthb"]
 

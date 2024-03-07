@@ -4,18 +4,18 @@ using System.ComponentModel.DataAnnotations;
 using System.Formats.Asn1;
 using System.Runtime.InteropServices;
 
-public partial class Character : CharacterBody2D
+public partial class Player : CharacterBody2D
 {
-	public const float Speed = 300.0f;
+	public const float HorizontalMovementSpeed = 300.0f;
 	public const float JumpVelocity = -400.0f;
 	[Export]
-	public float MaxOxygenTime = 30000;
+	public float ToppedOffOxygenTime = 30000;
 	[Export]
 	public float OxygenTime = 30000;
 	[Export]
-	public float MaxHealth = 100;
+	public double MaxHealth = 100;
 	[Export]
-	public float Health = 100;
+	public double Health = 100;
 	
 	private Node2D sprite;
 	private ShapeCast2D PlatfornDetect;
@@ -122,7 +122,7 @@ public partial class Character : CharacterBody2D
 		if (isUnderwater)
 		{
 			OxygenTime -= (float)delta;
-			OxygenTime = Mathf.Clamp(OxygenTime,0,MaxOxygenTime);
+			OxygenTime = Mathf.Clamp(OxygenTime,0,ToppedOffOxygenTime);
 
 			if (OxygenTime == 0) {
 				Health -= (float)delta*20f;
@@ -130,7 +130,7 @@ public partial class Character : CharacterBody2D
 			}
 		} else {
 			OxygenTime += (float)delta*3f;
-			OxygenTime = Mathf.Clamp(OxygenTime,0,MaxOxygenTime);
+			OxygenTime = Mathf.Clamp(OxygenTime,0,ToppedOffOxygenTime);
 		}
 		Vector2 velocity = Velocity;
 
@@ -153,22 +153,22 @@ public partial class Character : CharacterBody2D
 		{
 			if (direction != Vector2.Zero)
 			{
-				velocity.X = direction.X * Speed;
+				velocity.X = direction.X * HorizontalMovementSpeed;
 			}
 			else
 			{
-				velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+				velocity.X = Mathf.MoveToward(Velocity.X, 0, HorizontalMovementSpeed);
 			}
 		}
 		else
 		{
 			if (direction != Vector2.Zero)
 			{
-				velocity = direction * Speed;
+				velocity = direction * HorizontalMovementSpeed;
 			}
 			else
 			{
-				velocity = new Vector2(Mathf.MoveToward(Velocity.X, 0, Speed), Mathf.MoveToward(Velocity.Y, 0, Speed));
+				velocity = new Vector2(Mathf.MoveToward(Velocity.X, 0, HorizontalMovementSpeed), Mathf.MoveToward(Velocity.Y, 0, HorizontalMovementSpeed));
 			}
 		}
 
