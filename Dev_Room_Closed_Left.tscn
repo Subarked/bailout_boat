@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://drxqal7eseyr0"]
+[gd_scene load_steps=17 format=3 uid="uid://drxqal7eseyr0"]
 
 [ext_resource type="Script" path="res://RoomBehaviour.cs" id="1_wjf5l"]
 [ext_resource type="Texture2D" uid="uid://bngc3slfr2i7a" path="res://Textures/Dev_Room_Infill.png" id="3_1p55n"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bllpp4m70go6e" path="res://Textures/Dev_Room_Outline_Closed_Left.png" id="5_073ug"]
 [ext_resource type="PackedScene" uid="uid://cc5a1hiaqxkuj" path="res://Dev_Stairs_Down.tscn" id="5_vuv5x"]
 [ext_resource type="PackedScene" uid="uid://ks8kc3hkcgc0" path="res://Dev_Stairs_Up.tscn" id="6_gqiya"]
+[ext_resource type="PackedScene" uid="uid://jd0tmn6rggob" path="res://Breaking_Point.tscn" id="7_runcy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pefxg"]
 size = Vector2(264, 4)
@@ -49,6 +50,8 @@ texture = ExtResource("3_1p55n")
 z_as_relative = false
 material = ExtResource("3_xk027")
 texture = ExtResource("3_1p55n")
+
+[node name="BreakingPoint" parent="." instance=ExtResource("7_runcy")]
 
 [node name="Solid Walls" type="StaticBody2D" parent="."]
 

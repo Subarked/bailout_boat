@@ -13,6 +13,7 @@ public partial class InteractableObject : Node2D
 		}
 		return 0;
 	}
+	
 	public virtual int Interacted(Player player)
 	{
 		return 1;
