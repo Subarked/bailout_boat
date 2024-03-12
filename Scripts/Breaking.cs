@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class BreakingPoint : InteractableObject
+public partial class Breaking : InteractableObject
 {
 	public double damage = 0;
 	private Sprite2D sprite2D;
@@ -15,13 +15,15 @@ public partial class BreakingPoint : InteractableObject
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		
 		damage = Math.Clamp(damage+delta/60d,0d,1d);
-		sprite2D.Frame = (int)(damage*(sprite2D.Vframes*sprite2D.Hframes));
+		sprite2D.Frame = (int)(damage*(sprite2D.Vframes*sprite2D.Hframes-1));
 	}
 
-	public virtual int Interacted(Player player)
+	public override int Interacted(Player player)
 	{
-		damage -= 10d;
+		GD.Print("aaaa!");
+		damage = Math.Clamp(damage-10d/60d,0,1);
 		return 1;
 	}
 }

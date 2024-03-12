@@ -1,12 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://jd0tmn6rggob"]
+[gd_scene load_steps=4 format=3 uid="uid://jd0tmn6rggob"]
 
 [ext_resource type="Script" path="res://Scripts/Breaking.cs" id="1_bubfi"]
 [ext_resource type="Texture2D" uid="uid://bvs7k0sgk11ha" path="res://Textures/Breaking Dev.png" id="1_m8rqn"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yyjlj"]
+size = Vector2(15, 15)
+
 [node name="BreakingPoint" type="Node2D"]
+z_index = -1
 script = ExtResource("1_bubfi")
-maxInteractDistance = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_m8rqn")
 hframes = 17
+frame = 16
+
+[node name="InteractArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("RectangleShape2D_yyjlj")
