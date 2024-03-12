@@ -11,8 +11,6 @@ public partial class RoomBehaviour : Node2D
 	public double Height;
 	[Export]
 	public double Width;
-	public double WaterHeight;
-	public double WaterHeightYPosition;
 	private ShaderMaterial Shader;
 	private double FillAmount;
 	private Node2D RoomWater;
@@ -32,8 +30,6 @@ public partial class RoomBehaviour : Node2D
 	{
 		WaterVolume = Mathf.Min(WaterVolume, Volume);
 		FillAmount = WaterVolume / Volume;
-		WaterHeight = WaterVolume / Volume * Height;
-		WaterHeightYPosition = GlobalPosition.Y + Height / 2f - WaterHeight;
 	}
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)

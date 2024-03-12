@@ -160,7 +160,7 @@ public partial class Player : CharacterBody2D
 					if (roomNode != null)
 					{
 						RoomBehaviour room = roomNode as RoomBehaviour;
-						if (GlobalPosition.Y - 12f >= room.WaterHeightYPosition)
+						if (GlobalPosition.Y - 12f >= room.GlobalPosition.Y + room.Height / 2f - room.WaterVolume / room.Volume * room.Height)
 						{
 							if (!isUnderwater)
 							{
