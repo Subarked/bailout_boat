@@ -26,6 +26,7 @@ public partial class RoomBehaviour : Node2D
 		//THIS IS DUMB, I HATE THAT I HAVE TO DO THIS, WHYYYY
         Shader = new ShaderMaterial() { Shader = (RoomWater.Material as ShaderMaterial).Shader.Duplicate() as Shader };
 		RoomWater.Material = Shader;
+		Area = Height*Width;
 	}
 
     public override void _PhysicsProcess(double delta)
