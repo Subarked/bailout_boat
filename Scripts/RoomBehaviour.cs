@@ -4,15 +4,14 @@ using System;
 public partial class RoomBehaviour : Node2D
 {
 	[Export]
+	public double StartingVolumePercent = 0;
 	public double WaterVolume;
 	public double Volume;
 	[Export]
 	public double Height;
 	[Export]
 	public double Width;
-	[Export]
 	public double WaterHeight;
-	[Export]
 	public double WaterHeightYPosition;
 	private ShaderMaterial Shader;
 	private double FillAmount;
@@ -26,13 +25,14 @@ public partial class RoomBehaviour : Node2D
 		Shader = new ShaderMaterial() { Shader = (RoomWater.Material as ShaderMaterial).Shader.Duplicate() as Shader };
 		RoomWater.Material = Shader;
 		Volume = Height * Width;
+		WaterVolume = Volume*StartingVolumePercent;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		WaterVolume = Mathf.Min(WaterVolume, Volume);
-		FillAmount = (float)WaterVolume / Volume;
-		WaterHeight = FillAmount * Height;
+		FillAmount = WaterVolume / Volume;
+		WaterHeight = WaterVolume / Volume * Height;
 		WaterHeightYPosition = GlobalPosition.Y + Height / 2f - WaterHeight;
 	}
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
