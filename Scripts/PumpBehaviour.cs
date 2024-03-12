@@ -14,6 +14,7 @@ public partial class PumpBehaviour : ToggleInteractableObject
 	{
 		sprite = FindChild("Sprite2D") as Sprite2D;
 		Room = GetParent() as RoomBehaviour;
+		sprite.Frame = base.State ? 0 : 1;
 	}
 
 	public override int SwitchedState(Player player)
@@ -34,7 +35,7 @@ public partial class PumpBehaviour : ToggleInteractableObject
 		if (State)
 		{
 			double ignore = 0;
-			WaterMover.MoveWater(ref Room.WaterVolume, Room.Height, Room.Volume, ref ignore, 0, 0, Length, delta);
+			WaterMover.MoveWater(ref Room.WaterVolume, Room.Height, Room.Volume, ref ignore, Room.Height, Room.Volume, Length, delta);
 			//I swear I'll learn fluid dynamics soon please bear with me
 			//double pressure = Math.Clamp(Room.Area / Room.FloodAmount, 0, 1); //Completely bullshit pressure calc
 			//double TransferAmount = Math.Clamp(Room.FloodAmount, -TransferSpeed * delta, TransferSpeed * delta); //Amount to transfer from Room0 to NULL, negative if transferring from NULL to Room0
