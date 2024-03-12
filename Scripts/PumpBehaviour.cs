@@ -4,10 +4,9 @@ using System;
 public partial class PumpBehaviour : ToggleInteractableObject
 {
 	[Export]
-	public float PumpWidth;
+	public float Length;
 	private RoomBehaviour Room;
 	private Sprite2D sprite;
-	float TransferSpeed;
 
 
 	// Called when the node enters the scene tree for the first time.
@@ -15,7 +14,6 @@ public partial class PumpBehaviour : ToggleInteractableObject
 	{
 		sprite = FindChild("Sprite2D") as Sprite2D;
 		Room = GetParent() as RoomBehaviour;
-		TransferSpeed = PumpWidth * 20f * 5f; //I swear I'll learn fluid dynamics soon please bear with me
 	}
 
 	public override int SwitchedState(Player player)
@@ -35,10 +33,12 @@ public partial class PumpBehaviour : ToggleInteractableObject
 	{
 		if (State)
 		{
+			double ignore = 0;
+			WaterMover.MoveWater(ref Room.WaterVolume, Room.Height, Room.Volume, ref ignore, 0, 0, Length, delta);
 			//I swear I'll learn fluid dynamics soon please bear with me
-			double pressure = Math.Clamp(Room.Area / Room.FloodAmount, 0, 1); //Completely bullshit pressure calc
-			double TransferAmount = Math.Clamp(Room.FloodAmount, -TransferSpeed * delta, TransferSpeed * delta); //Amount to transfer from Room0 to NULL, negative if transferring from NULL to Room0
-			Room.FloodAmount -= TransferAmount * pressure; //Change Room0 water amounts, Multiply by pressure to make it slower at lower amounts
+			//double pressure = Math.Clamp(Room.Area / Room.FloodAmount, 0, 1); //Completely bullshit pressure calc
+			//double TransferAmount = Math.Clamp(Room.FloodAmount, -TransferSpeed * delta, TransferSpeed * delta); //Amount to transfer from Room0 to NULL, negative if transferring from NULL to Room0
+			//Room.FloodAmount -= TransferAmount * pressure; //Change Room0 water amounts, Multiply by pressure to make it slower at lower amounts
 		}
 	}
 }

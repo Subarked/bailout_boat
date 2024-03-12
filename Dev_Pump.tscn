@@ -8,7 +8,7 @@ size = Vector2(32, 32)
 
 [node name="Dev_Pump" type="Node2D"]
 script = ExtResource("1_p51gn")
-PumpWidth = 32.0
+Length = 36.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_eseyf")

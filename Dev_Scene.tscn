@@ -15,10 +15,10 @@ position = Vector2(-118, -41)
 [node name="Ship Root" type="Node" parent="."]
 
 [node name="Room_0" parent="Ship Root" instance=ExtResource("2_03nrr")]
-FloodAmount = 1035.0
 
 [node name="Room_1" parent="Ship Root" instance=ExtResource("2_uli63")]
 position = Vector2(264, 0)
+WaterVolume = 34304.0
 
 [node name="Room_2" parent="Ship Root" instance=ExtResource("2_uli63")]
 position = Vector2(528, 0)
