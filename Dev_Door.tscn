@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dnxepypn33u2k"]
 
-[ext_resource type="Script" path="res://DoorBehaviour.cs" id="1_g15hd"]
+[ext_resource type="Script" path="res://Scripts/DoorBehaviour.cs" id="1_g15hd"]
 [ext_resource type="Texture2D" uid="uid://cm3md8e5fkd35" path="res://Textures/Dev_Door.png" id="2_4ale0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_goicm"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bsjgomqe54mgy"]
 
-[ext_resource type="Script" path="res://PumpBehaviour.cs" id="1_p51gn"]
+[ext_resource type="Script" path="res://Scripts/PumpBehaviour.cs" id="1_p51gn"]
 [ext_resource type="Texture2D" uid="uid://db34qy6isp8y8" path="res://Textures/EntityPumpRed.png" id="2_eseyf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wxbuo"]

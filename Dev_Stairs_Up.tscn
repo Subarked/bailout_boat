@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ks8kc3hkcgc0"]
 
-[ext_resource type="Script" path="res://StairsBehaviour.cs" id="1_prkgj"]
+[ext_resource type="Script" path="res://Scripts/StairsBehaviour.cs" id="1_prkgj"]
 [ext_resource type="Texture2D" uid="uid://b6x2ayp08ku44" path="res://Textures/Dev_Stairs_Up.png" id="2_i4cxa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ij2u"]

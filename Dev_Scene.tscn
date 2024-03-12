@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://drxqal7eseyr0" path="res://Dev_Room_Closed_Left.tscn" id="2_03nrr"]
 [ext_resource type="PackedScene" uid="uid://bsstgdk8a01p0" path="res://Dev_Room.tscn" id="2_uli63"]
 [ext_resource type="PackedScene" uid="uid://dnxepypn33u2k" path="res://Dev_Door.tscn" id="3_bpwds"]
-[ext_resource type="Script" path="res://CameraControl.cs" id="4_pu5dw"]
+[ext_resource type="Script" path="res://Scripts/CameraControl.cs" id="4_pu5dw"]
 [ext_resource type="PackedScene" uid="uid://t7ty5ldnqq2p" path="res://Dev_Room_Closed_Right.tscn" id="4_yjtfo"]
 
 [node name="Node2D" type="Node2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://t7ty5ldnqq2p"]
 
-[ext_resource type="Script" path="res://RoomBehaviour.cs" id="1_0urfe"]
+[ext_resource type="Script" path="res://Scripts/RoomBehaviour.cs" id="1_0urfe"]
 [ext_resource type="Material" uid="uid://b7enb3lrw2fcf" path="res://Room_Water_Fill.material" id="3_cv5j8"]
 [ext_resource type="Texture2D" uid="uid://bngc3slfr2i7a" path="res://Textures/Dev_Room_Infill.png" id="3_d330w"]
 [ext_resource type="PackedScene" uid="uid://cc5a1hiaqxkuj" path="res://Dev_Stairs_Down.tscn" id="5_hq4uj"]
