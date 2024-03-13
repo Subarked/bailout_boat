@@ -14,7 +14,7 @@ public partial class StairsBehaviour : InteractableObject
 		}
 	}
 	
-	public override int Interacted(Player player)
+	public override int Interacted(Player player, bool altInteracted)
 	{
 		//Transform2D startingTransform = Transform;
 		//Transform2D endingTransform = ConnectedStairs.Transform;
