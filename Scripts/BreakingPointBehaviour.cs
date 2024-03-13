@@ -5,31 +5,63 @@ public partial class BreakingPointBehaviour : InteractableObject
 {
 	[Export]
 	public bool broken = false;
+	[Export]
+	public double Length;
+	[Export]
 	public double damage = 0;
+	private RoomBehaviour Room;
 	private Sprite2D sprite2D;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		sprite2D = FindChild("Sprite2D") as Sprite2D;
+		Room = GetParent() as RoomBehaviour;
+	}
 
+	public override void _PhysicsProcess(double delta)
+	{
+		if (broken)
+		{
+			double ignore = Room.Volume;
+			WaterMover.MoveWater(ref ignore, Room.Height, Room.Volume, ref Room.WaterVolume, Room.Height, Room.Volume, Length * damage, delta);
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
+
 	public override void _Process(double delta)
 	{
 		if (broken)
 		{
+			sprite2D.Visible = true;
 			damage = Math.Clamp(damage + delta / 60d, 0d, 1d);
 			sprite2D.Frame = (int)(damage * (sprite2D.Vframes * sprite2D.Hframes - 1));
+		}
+		else
+		{
+			sprite2D.Visible = false;
 		}
 
 	}
 
 	public override int Interacted(Player player)
 	{
-		GD.Print("aaaa!");
-		damage = Math.Clamp(damage - 10d / 60d, 0d, 1d);
-		sprite2D.Frame = (int)(damage * (sprite2D.Vframes * sprite2D.Hframes - 1));
-		return 1;
+		if (broken)
+		{
+			GD.Print("aaaa!");
+			damage = damage - 10d / 60d;
+			if (damage <= 0)
+			{
+				damage = 0;
+				broken = false;
+			}
+			sprite2D.Frame = (int)(damage * (sprite2D.Vframes * sprite2D.Hframes - 1));
+			return 1;
+		}
+		else
+		{
+			return -1;
+		}
+
 	}
 }
