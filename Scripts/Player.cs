@@ -67,7 +67,11 @@ public partial class Player : CharacterBody2D
 
 	void CameraAreaEntered(Area2D area)
 	{
-		Globals.CameraCenter = area.GlobalPosition;
+		if (area.Name == "Room_Area")
+		{
+			Globals.CameraCenter = area.GlobalPosition;
+		}
+
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -101,7 +105,8 @@ public partial class Player : CharacterBody2D
 		//}
 
 		// Add the gravity.
-		if (!IsOnFloor() && !isFlying) {
+		if (!IsOnFloor() && !isFlying)
+		{
 			velocity += gravity * (float)delta; //gravity m/s/s
 		}
 		// Get the input direction and handle the movement/deceleration.

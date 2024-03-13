@@ -26,20 +26,14 @@ position = Vector2(528, 0)
 [node name="Room_3" parent="Ship Root" instance=ExtResource("4_yjtfo")]
 position = Vector2(792, 0)
 
-[node name="Door_0" parent="Ship Root" node_paths=PackedStringArray("Room0", "Room1") instance=ExtResource("3_bpwds")]
+[node name="Door_0" parent="Ship Root" instance=ExtResource("3_bpwds")]
 position = Vector2(132, 49)
-Room0 = NodePath("../Room_0")
-Room1 = NodePath("../Room_1")
 
-[node name="Door_1" parent="Ship Root" node_paths=PackedStringArray("Room0", "Room1") instance=ExtResource("3_bpwds")]
+[node name="Door_1" parent="Ship Root" instance=ExtResource("3_bpwds")]
 position = Vector2(396, 49)
-Room0 = NodePath("../Room_1")
-Room1 = NodePath("../Room_2")
 
-[node name="Door_2" parent="Ship Root" node_paths=PackedStringArray("Room0", "Room1") instance=ExtResource("3_bpwds")]
+[node name="Door_2" parent="Ship Root" instance=ExtResource("3_bpwds")]
 position = Vector2(660, 49)
-Room0 = NodePath("../Room_2")
-Room1 = NodePath("../Room_3")
 
 [node name="Camera" type="Node2D" parent="."]
 script = ExtResource("4_pu5dw")

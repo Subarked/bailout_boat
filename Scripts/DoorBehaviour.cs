@@ -10,20 +10,62 @@ public partial class DoorBehaviour : ToggleInteractableObject
 	[Export]
 	public float Length;
 	private StaticBody2D collider;
+	private Area2D RoomDetection;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		collider = FindChild("StaticBody2D") as StaticBody2D;
+		RoomDetection = FindChild("Room_Detection") as Area2D;
+
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (Room0 == null)
+		{
+			var overlapping = RoomDetection.GetOverlappingAreas();
+			GD.Print("yeah! test! one!");
+			foreach (var area in overlapping)
+			{
+				GD.Print("beeboop");
+				if (area.Name == "Room_Area")
+				{
+					var Room = area.GetParent() as RoomBehaviour;
+					if (Room != Room1)
+					{
+						Room0 = Room;
+						GD.Print("yeah! one!");
+						break;
+					}
+				}
+			}
+		}
+		if (Room1 == null)
+		{
+			var overlapping = RoomDetection.GetOverlappingAreas();
+			GD.Print("yeah! test! two!");
+			foreach (var area in overlapping)
+			{
+				GD.Print("beeboop");
+				if (area.Name == "Room_Area")
+				{
+					var Room = area.GetParent() as RoomBehaviour;
+					if (Room != Room0)
+					{
+						Room1 = Room;
+						GD.Print("yeah! one!");
+						break;
+					}
+				}
+			}
+		}
+
 		if (State)
 		{
 			//actual fluid physics
-			WaterMover.MoveWater(ref Room0.WaterVolume,Room0.Height,Room0.Volume,ref Room1.WaterVolume,Room1.Height,Room1.Volume,Length,delta, true);
-			
-			
+			WaterMover.MoveWater(ref Room0.WaterVolume, Room0.Height, Room0.Volume, ref Room1.WaterVolume, Room1.Height, Room1.Volume, Length, delta, true);
+
+
 			//These numbers don't make sense, I'll learn fluid dynamics eventually I promise
 			//double difference = Room0.FloodAmount - Room1.FloodAmount; //Room0 > Room1 = +, Room0 < Room1 = -
 			//double pressure = Math.Clamp(Room0.Area / Math.Abs(difference) / 2f + Room1.Area / Math.Abs(difference) / 2f, 0, 1); //Completely bullshit pressure calc XD
