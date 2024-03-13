@@ -74,7 +74,7 @@ public partial class DoorBehaviour : ToggleInteractableObject
 			//Room1.FloodAmount += TransferAmount * pressure; //Change Room1 water amounts, Multiply by pressure to make it slower at lower amounts
 		}
 	}
-	public override int SwitchedState(Player player)
+	public override int SwitchedState(Player player, bool altInteracted)
 	{
 
 		collider.ProcessMode = State ? ProcessModeEnum.Disabled : ProcessModeEnum.Inherit;

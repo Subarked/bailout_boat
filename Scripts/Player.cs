@@ -53,16 +53,28 @@ public partial class Player : CharacterBody2D
 					if (interactedNode is InteractableObject)
 					{
 						InteractableObject interacted = interactedNode as InteractableObject;
-						interacted.Interact(this);
+						interacted.Interact(this, false);
 					}
 				}
 			}
 		}
-		//bool altInteracted = Input.IsActionJustPressed("interact_alt");
-		//if (altInteracted)
-		//{
-		//	//TODO: FIND A USE
-		//}
+		bool altInteracted = Input.IsActionJustPressed("interact_alt");
+		if (altInteracted)
+		{
+			if (InteractArea.HasOverlappingAreas()) //if InteractArea is touching other Areas
+			{
+				var OverlappingAreas = InteractArea.GetOverlappingAreas();
+				foreach (var area in OverlappingAreas)
+				{
+					Node interactedNode = area.GetParent();
+					if (interactedNode is InteractableObject)
+					{
+						InteractableObject interacted = interactedNode as InteractableObject;
+						interacted.Interact(this, true);
+					}
+				}
+			}
+		}
 	}
 
 	void CameraAreaEntered(Area2D area)

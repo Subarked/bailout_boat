@@ -44,7 +44,7 @@ public partial class BreakingPointBehaviour : InteractableObject
 
 	}
 
-	public override int Interacted(Player player)
+	public override int Interacted(Player player, bool altInteracted)
 	{
 		if (broken)
 		{
