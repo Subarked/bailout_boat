@@ -58,6 +58,11 @@ public partial class BreakingPointBehaviour : InteractableObject
 			sprite2D.Frame = (int)(damage * (sprite2D.Vframes * sprite2D.Hframes - 1));
 			return 1;
 		}
+		else if (altInteracted)
+		{
+			broken = true;
+			return 1;
+		}
 		else
 		{
 			return -1;
