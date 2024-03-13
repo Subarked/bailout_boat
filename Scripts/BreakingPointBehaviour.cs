@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Breaking : InteractableObject
+public partial class BreakingPointBehaviour : InteractableObject
 {
 	[Export]
 	public bool broken = false;
