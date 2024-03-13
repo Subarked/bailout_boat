@@ -4,7 +4,7 @@ using System;
 public partial class PumpBehaviour : ToggleInteractableObject
 {
 	[Export]
-	public float Length;
+	public double Length;
 	private RoomBehaviour Room;
 	private Sprite2D sprite;
 
@@ -17,7 +17,7 @@ public partial class PumpBehaviour : ToggleInteractableObject
 		sprite.Frame = base.State ? 0 : 1;
 	}
 
-	public override int SwitchedState(Player player)
+	public override int SwitchedState(Player player, bool altInteracted)
 	{
 		sprite.Frame = base.State ? 0 : 1;
 		////Expanded ternary (?:) operator
