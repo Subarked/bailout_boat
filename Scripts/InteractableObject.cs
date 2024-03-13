@@ -18,4 +18,5 @@ public partial class InteractableObject : Node2D
 	{
 		return 1;
 	}
+	
 }
