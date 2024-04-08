@@ -151,10 +151,11 @@ public partial class Player : CharacterBody2D
 			//}
 		}
 
-		if (direction.Y > 0 && IsOnFloor() && PlatfornDetect.IsColliding())
-		{
-			Position += gravityVector;
-		}
+		//finally commenting out being able to fall through platform floors
+		//if (direction.Y > 0 && IsOnFloor() && PlatfornDetect.IsColliding())
+		//{
+		//	Position += gravityVector;
+		//}
 
 		if (Position.Y > 1000)
 		{
