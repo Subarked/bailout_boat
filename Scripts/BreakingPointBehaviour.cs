@@ -10,12 +10,11 @@ public partial class BreakingPointBehaviour : InteractableObject
 	[Export]
 	public double damage = 0;
 	[Export]
-	private float PixelWidth = 16;
+	private float PixelWidth = 8;
 	private RoomBehaviour Room;
 	private Sprite2D sprite2D;
 	private ShaderMaterial Shader;
 	private Vector2[] crackingPoints;
-	private int[] connectedPoints;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -26,20 +25,21 @@ public partial class BreakingPointBehaviour : InteractableObject
 		sprite2D.Material = Shader;
 		uint armNumber = GD.Randi() % 3 + 3;
 		crackingPoints = new Vector2[1+armNumber*2];
-		connectedPoints = new int[1+armNumber*2];
 		crackingPoints[0] = Vector2.Zero;
-		connectedPoints[0] = 0;
 		for (int i = 0; i < armNumber; i++) {
-			Vector2 firstJoint = new Vector2((float)GD.RandRange(-1f,1f), (float)GD.RandRange(-1f,1f));
-			Vector2 secondJoint = new Vector2((float)GD.RandRange(-1f,1f), (float)GD.RandRange(-1f,1f));
+			float areaOfRandom = (2f * Mathf.Pi)/armNumber;
+			float firstAngle = (float)GD.RandRange(areaOfRandom*i, areaOfRandom*(i+1));
+			float secondAngle = (float)GD.RandRange(-areaOfRandom/2f, areaOfRandom/2f)+firstAngle;
+			Vector2 firstJoint = new Vector2(MathF.Sin(firstAngle), MathF.Cos(firstAngle))*0.5f;
+			Vector2 secondJoint = new Vector2(MathF.Sin(secondAngle), MathF.Cos(secondAngle))*0.5f+firstJoint;
+			float secondJointLength = secondJoint.Length();
+			firstJoint *= (1f/secondJointLength);
+			secondJoint *= (1f/secondJointLength);
 			crackingPoints[1+i*2] = firstJoint;
 			crackingPoints[1+i*2+1] = secondJoint;
-			connectedPoints[1+i*2] = 0;
-			connectedPoints[1+i*2+1] = 1+i*2;
 		}
-		Shader.SetShaderParameter("Points",Variant.CreateFrom(crackingPoints));
+		Shader.SetShaderParameter("Points", Variant.CreateFrom(crackingPoints));
 		Shader.SetShaderParameter("PointCount", Variant.CreateFrom(crackingPoints.Length));
-		Shader.SetShaderParameter("PointConnections",Variant.CreateFrom(connectedPoints));
 		Shader.SetShaderParameter("PixelWidth", Variant.CreateFrom(PixelWidth));
 	}
 

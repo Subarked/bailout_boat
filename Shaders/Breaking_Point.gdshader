@@ -4,8 +4,7 @@ shader_type canvas_item;
 uniform float PixelWidth = 2.f;
 uniform int PointCount;
 uniform vec2 Points[128];
-uniform int PointConnections[128];
-
+//TODO: add JointCount uniform to make it so you can have more than 2 points per arm
 void vertex() {
 	// Called for every vertex the material is visible on.
 }
@@ -19,16 +18,16 @@ float sdSegment( in vec2 p, in vec2 a, in vec2 b )
 
 void fragment() {
 	float min_line_dist = 100000.f;
-	for (int i = 0; i < PointCount; i++) {
-		vec2 PointOne = Points[i];
-		vec2 PointTwo = Points[PointConnections[i]];
+	for (int i = 0; i < PointCount-1; i++) {
+		vec2 PointOne = Points[i+1];
+		vec2 PointTwo = i % 2 == 0 ? Points[0] : Points[i];
 		float line_dist = sdSegment(2.f*UV-vec2(1,1),PointOne,PointTwo);
 		min_line_dist = min(min_line_dist, line_dist);
 	}
 	float line_thickness = length(TEXTURE_PIXEL_SIZE)*PixelWidth;
 	min_line_dist = min_line_dist - line_thickness;
-	float color = min_line_dist < 0.f ? 1.f : 0.f;
-	COLOR = vec4(vec3(color),1);
+	bool in_line = min_line_dist < 0.f;
+	COLOR = in_line ? vec4(0,0,0,1) : vec4(0,0,0,0);
 	// Called for every pixel the material is visible on.
 }
 
