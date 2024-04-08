@@ -24,17 +24,17 @@ public partial class DoorBehaviour : ToggleInteractableObject
 		if (Room0 == null)
 		{
 			var overlapping = RoomDetection.GetOverlappingAreas();
-			GD.Print("yeah! test! one!");
+			//GD.Print("yeah! test! one!");
 			foreach (var area in overlapping)
 			{
-				GD.Print("beeboop");
+				//GD.Print("beeboop");
 				if (area.Name == "Room_Area")
 				{
 					var Room = area.GetParent() as RoomBehaviour;
 					if (Room != Room1)
 					{
 						Room0 = Room;
-						GD.Print("yeah! one!");
+						//GD.Print("yeah! one!");
 						break;
 					}
 				}
@@ -43,17 +43,17 @@ public partial class DoorBehaviour : ToggleInteractableObject
 		if (Room1 == null)
 		{
 			var overlapping = RoomDetection.GetOverlappingAreas();
-			GD.Print("yeah! test! two!");
+			//GD.Print("yeah! test! two!");
 			foreach (var area in overlapping)
 			{
-				GD.Print("beeboop");
+				//GD.Print("beeboop");
 				if (area.Name == "Room_Area")
 				{
 					var Room = area.GetParent() as RoomBehaviour;
 					if (Room != Room0)
 					{
 						Room1 = Room;
-						GD.Print("yeah! one!");
+						//GD.Print("yeah! one!");
 						break;
 					}
 				}
