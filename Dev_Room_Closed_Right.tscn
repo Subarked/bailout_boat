@@ -51,6 +51,7 @@ material = ExtResource("3_cv5j8")
 texture = ExtResource("3_d330w")
 
 [node name="BreakingPoint" parent="." instance=ExtResource("7_amjnc")]
+broken = true
 
 [node name="Solid Walls" type="StaticBody2D" parent="."]
 
