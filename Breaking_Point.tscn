@@ -10,9 +10,9 @@ size = Vector2(16, 16)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ikk6e"]
 shader = ExtResource("2_yyjhb")
 shader_parameter/PixelWidth = 32.0
-shader_parameter/PointCount = 4
-shader_parameter/Points = PackedVector2Array(0, 0, 0.9, 0.9, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5)
-shader_parameter/PointConnections = null
+shader_parameter/PointCount = 9
+shader_parameter/Points = PackedVector2Array(0, 0, 0, -0.5, -0.5, -0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0.5, -0.5, 0, -0.5, 0.5)
+shader_parameter/damage = 0.0
 
 [node name="BreakingPoint" type="Node2D"]
 z_index = -1
@@ -31,5 +31,5 @@ shape = SubResource("RectangleShape2D_yyjlj")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ikk6e")
 position = Vector2(-1, 0)
-scale = Vector2(0.125, 0.125)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_j0de7")
