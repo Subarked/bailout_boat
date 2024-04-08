@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://jd0tmn6rggob"]
 
 [ext_resource type="Script" path="res://Scripts/BreakingPointBehaviour.cs" id="1_2nmwh"]
-[ext_resource type="Shader" path="res://Breaking_Point.gdshader" id="2_wfogf"]
+[ext_resource type="Shader" path="res://Shaders/Breaking_Point.gdshader" id="2_wfogf"]
 [ext_resource type="Texture2D" uid="uid://dcvwlfhgrv1ap" path="res://icon.svg" id="3_j0de7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyjlj"]
