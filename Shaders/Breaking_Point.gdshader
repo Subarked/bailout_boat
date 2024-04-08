@@ -5,6 +5,7 @@ uniform float PixelWidth = 2.f;
 uniform int PointCount;
 uniform vec2 Points[128];
 //TODO: add JointCount uniform to make it so you can have more than 2 points per arm
+uniform float Damage : hint_range(0,1) = 0.f;
 void vertex() {
 	// Called for every vertex the material is visible on.
 }
@@ -20,8 +21,13 @@ void fragment() {
 	float min_line_dist = 100000.f;
 	for (int i = 0; i < PointCount-1; i++) {
 		bool whichPoint = i % 2 == 0; //true = first, false = second
+		if (Damage < 0.5f && !whichPoint) {
+			continue;
+		}
 		vec2 PointTwo = whichPoint ? Points[0] : Points[i];
-		vec2 PointOne = Points[i+1]+PointTwo;
+		PointTwo = PointTwo * clamp(Damage*2.f,0.f,1.f);
+		vec2 PointOne = (whichPoint ? Points[i+1] * clamp(Damage*2.f,0.f,1.f) : Points[i+1] * clamp(Damage*2.f-1.f,0.f,1.f))+PointTwo;
+		
 		float line_dist = sdSegment(2.f*UV-vec2(1,1),PointOne,PointTwo);
 		min_line_dist = min(min_line_dist, line_dist);
 	}

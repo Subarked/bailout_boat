@@ -12,7 +12,7 @@ shader = ExtResource("2_yyjhb")
 shader_parameter/PixelWidth = 32.0
 shader_parameter/PointCount = 9
 shader_parameter/Points = PackedVector2Array(0, 0, 0, -0.5, -0.5, -0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0.5, -0.5, 0, -0.5, 0.5)
-shader_parameter/damage = 0.0
+shader_parameter/Damage = 0.0
 
 [node name="BreakingPoint" type="Node2D"]
 z_index = -1

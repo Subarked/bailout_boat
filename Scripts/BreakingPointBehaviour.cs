@@ -65,6 +65,7 @@ public partial class BreakingPointBehaviour : InteractableObject
 		{
 			sprite2D.Visible = false;
 		}
+		Shader.SetShaderParameter("Damage", Variant.CreateFrom(damage));
 	}
 
 	public override int Interacted(Player player, bool altInteracted)
