@@ -11,11 +11,23 @@ public partial class BreakingPointBehaviour : InteractableObject
 	public double damage = 0;
 	private RoomBehaviour Room;
 	private Sprite2D sprite2D;
+	private ShaderMaterial Shader;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		sprite2D = FindChild("Sprite2D") as Sprite2D;
 		Room = GetParent() as RoomBehaviour;
+
+		Shader = new ShaderMaterial() { Shader = (sprite2D.Material as ShaderMaterial).Shader.Duplicate() as Shader };
+		sprite2D.Material = Shader;
+		Vector2[] crackingPoints = new Vector2[5];
+		crackingPoints[0] = Vector2.Zero;
+		for (int i = 1; i < crackingPoints.Length; i++) {
+			crackingPoints[i] = new Vector2((float)GD.RandRange(-1f,1f), (float)GD.RandRange(-1f,1f));
+		}
+		Shader.SetShaderParameter("Points",Variant.CreateFrom(crackingPoints));
+		Shader.SetShaderParameter("PointCount", Variant.CreateFrom(crackingPoints.Length));
+		Shader.SetShaderParameter("PixelWidth", Variant.CreateFrom(16));
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -35,27 +47,24 @@ public partial class BreakingPointBehaviour : InteractableObject
 		{
 			sprite2D.Visible = true;
 			damage = Math.Clamp(damage + delta / 60d, 0d, 1d);
-			sprite2D.Frame = (int)(damage * (sprite2D.Vframes * sprite2D.Hframes - 1));
 		}
 		else
 		{
 			sprite2D.Visible = false;
 		}
-
 	}
 
 	public override int Interacted(Player player, bool altInteracted)
 	{
 		if (broken)
 		{
-			GD.Print("aaaa!");
+			//GD.Print("aaaa!");
 			damage = damage - 10d / 60d;
 			if (damage <= 0)
 			{
 				damage = 0;
 				broken = false;
 			}
-			sprite2D.Frame = (int)(damage * (sprite2D.Vframes * sprite2D.Hframes - 1));
 			return 1;
 		}
 		else if (altInteracted)
