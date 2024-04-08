@@ -31,10 +31,10 @@ public partial class BreakingPointBehaviour : InteractableObject
 			float firstAngle = (float)GD.RandRange(areaOfRandom*i, areaOfRandom*(i+1));
 			float secondAngle = (float)GD.RandRange(-areaOfRandom/2f, areaOfRandom/2f)+firstAngle;
 			Vector2 firstJoint = new Vector2(MathF.Sin(firstAngle), MathF.Cos(firstAngle))*0.5f;
-			Vector2 secondJoint = new Vector2(MathF.Sin(secondAngle), MathF.Cos(secondAngle))*0.5f+firstJoint;
-			float secondJointLength = secondJoint.Length();
-			firstJoint *= (1f/secondJointLength);
-			secondJoint *= (1f/secondJointLength);
+			Vector2 secondJoint = new Vector2(MathF.Sin(secondAngle), MathF.Cos(secondAngle))*0.5f;
+			float armLength = (firstJoint+secondJoint).Length();
+			firstJoint *= (1f/armLength);
+			secondJoint *= (1f/armLength);
 			crackingPoints[1+i*2] = firstJoint;
 			crackingPoints[1+i*2+1] = secondJoint;
 		}

@@ -19,8 +19,9 @@ float sdSegment( in vec2 p, in vec2 a, in vec2 b )
 void fragment() {
 	float min_line_dist = 100000.f;
 	for (int i = 0; i < PointCount-1; i++) {
-		vec2 PointOne = Points[i+1];
-		vec2 PointTwo = i % 2 == 0 ? Points[0] : Points[i];
+		bool whichPoint = i % 2 == 0; //true = first, false = second
+		vec2 PointTwo = whichPoint ? Points[0] : Points[i];
+		vec2 PointOne = Points[i+1]+PointTwo;
 		float line_dist = sdSegment(2.f*UV-vec2(1,1),PointOne,PointTwo);
 		min_line_dist = min(min_line_dist, line_dist);
 	}
