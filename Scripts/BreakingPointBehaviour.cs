@@ -9,9 +9,13 @@ public partial class BreakingPointBehaviour : InteractableObject
 	public double Length;
 	[Export]
 	public double damage = 0;
+	[Export]
+	private float PixelWidth = 16;
 	private RoomBehaviour Room;
 	private Sprite2D sprite2D;
 	private ShaderMaterial Shader;
+	private Vector2[] crackingPoints;
+	private int[] connectedPoints;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -20,14 +24,23 @@ public partial class BreakingPointBehaviour : InteractableObject
 
 		Shader = new ShaderMaterial() { Shader = (sprite2D.Material as ShaderMaterial).Shader.Duplicate() as Shader };
 		sprite2D.Material = Shader;
-		Vector2[] crackingPoints = new Vector2[5];
+		uint armNumber = GD.Randi() % 3 + 3;
+		crackingPoints = new Vector2[1+armNumber*2];
+		connectedPoints = new int[1+armNumber*2];
 		crackingPoints[0] = Vector2.Zero;
-		for (int i = 1; i < crackingPoints.Length; i++) {
-			crackingPoints[i] = new Vector2((float)GD.RandRange(-1f,1f), (float)GD.RandRange(-1f,1f));
+		connectedPoints[0] = 0;
+		for (int i = 0; i < armNumber; i++) {
+			Vector2 firstJoint = new Vector2((float)GD.RandRange(-1f,1f), (float)GD.RandRange(-1f,1f));
+			Vector2 secondJoint = new Vector2((float)GD.RandRange(-1f,1f), (float)GD.RandRange(-1f,1f));
+			crackingPoints[1+i*2] = firstJoint;
+			crackingPoints[1+i*2+1] = secondJoint;
+			connectedPoints[1+i*2] = 0;
+			connectedPoints[1+i*2+1] = 1+i*2;
 		}
 		Shader.SetShaderParameter("Points",Variant.CreateFrom(crackingPoints));
 		Shader.SetShaderParameter("PointCount", Variant.CreateFrom(crackingPoints.Length));
-		Shader.SetShaderParameter("PixelWidth", Variant.CreateFrom(16));
+		Shader.SetShaderParameter("PointConnections",Variant.CreateFrom(connectedPoints));
+		Shader.SetShaderParameter("PixelWidth", Variant.CreateFrom(PixelWidth));
 	}
 
 	public override void _PhysicsProcess(double delta)

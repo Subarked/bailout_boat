@@ -1,17 +1,18 @@
 [gd_scene load_steps=6 format=3 uid="uid://jd0tmn6rggob"]
 
 [ext_resource type="Script" path="res://Scripts/BreakingPointBehaviour.cs" id="1_2nmwh"]
-[ext_resource type="Shader" path="res://Shaders/Breaking_Point.gdshader" id="2_wfogf"]
+[ext_resource type="Shader" path="res://Shaders/Breaking_Point.gdshader" id="2_yyjhb"]
 [ext_resource type="Texture2D" uid="uid://dcvwlfhgrv1ap" path="res://icon.svg" id="3_j0de7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyjlj"]
 size = Vector2(16, 16)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ikk6e"]
-shader = ExtResource("2_wfogf")
+shader = ExtResource("2_yyjhb")
 shader_parameter/PixelWidth = 32.0
 shader_parameter/PointCount = 4
 shader_parameter/Points = PackedVector2Array(0, 0, 0.9, 0.9, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5)
+shader_parameter/PointConnections = null
 
 [node name="BreakingPoint" type="Node2D"]
 z_index = -1

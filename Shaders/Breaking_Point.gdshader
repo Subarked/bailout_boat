@@ -3,7 +3,8 @@ shader_type canvas_item;
 
 uniform float PixelWidth = 2.f;
 uniform int PointCount;
-uniform vec2 Points[256];
+uniform vec2 Points[128];
+uniform int PointConnections[128];
 
 void vertex() {
 	// Called for every vertex the material is visible on.
@@ -20,20 +21,7 @@ void fragment() {
 	float min_line_dist = 100000.f;
 	for (int i = 0; i < PointCount; i++) {
 		vec2 PointOne = Points[i];
-		vec2 PointTwo = vec2(0);
-		float closestdst = 1000000.f;
-		for (int j = 0; j < PointCount; j++) {
-			if (j == i) {
-				continue;
-			}
-			vec2 PointCheck = Points[j];
-			float dst = distance(PointOne, PointCheck);
-			if (dst < closestdst) {
-				PointTwo = PointCheck;
-				closestdst = dst;
-			}
-		}
-		
+		vec2 PointTwo = Points[PointConnections[i]];
 		float line_dist = sdSegment(2.f*UV-vec2(1,1),PointOne,PointTwo);
 		min_line_dist = min(min_line_dist, line_dist);
 	}
