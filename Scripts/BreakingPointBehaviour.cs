@@ -59,7 +59,7 @@ public partial class BreakingPointBehaviour : InteractableObject
 		if (broken)
 		{
 			sprite2D.Visible = true;
-			damage = Math.Clamp(damage + delta / 60d, 0d, 1d);
+			damage = Math.Clamp(damage + delta / 15d, 0d, 1d);
 		}
 		else
 		{
